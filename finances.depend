@@ -1,0 +1,155 @@
+# depslib dependency file v1.0
+1567848571 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\adresat.cpp
+	"Adresat.h"
+
+1567356359 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\adresat.h
+	<string>
+
+1567848571 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\adresatmenedzer.cpp
+	"AdresatMenedzer.h"
+
+1567848571 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\adresatmenedzer.h
+	<vector>
+	"Adresat.h"
+	"PlikZAdresatami.h"
+
+1567850729 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\plikzadresatami.h
+	"Adresat.h"
+	<vector>
+	<fstream>
+	<iostream>
+	"MetodyPomocnicze.h"
+	"PlikTekstowy.h"
+
+1570830098 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\pliktekstowy.h
+	<iostream>
+	<fstream>
+
+1567848571 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\ksiazkaadresowa.cpp
+	"KsiazkaAdresowa.h"
+
+1567848571 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\ksiazkaadresowa.h
+	<iostream>
+	"UzytkownikMenedzer.h"
+	"AdresatMenedzer.h"
+
+1567669674 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\uzytkownikmenedzer.h
+	<iostream>
+	<vector>
+	<windows.h>
+	"Uzytkownik.h"
+	"PlikZUzytkownikami.h"
+
+1567352372 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\uzytkownik.h
+	<iostream>
+
+1567850729 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\plikzuzytkownikami.h
+	<fstream>
+	<sstream>
+	<iostream>
+	<string>
+	"Uzytkownik.h"
+	"MetodyPomocnicze.h"
+	"vector"
+	"PlikTekstowy.h"
+
+1570993391 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\main.cpp
+	<iostream>
+	<windows.h>
+	"Finances.h"
+	"UsersManager.h"
+	"AdditionalFunctions.h"
+
+1570829911 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\pliktekstowy.cpp
+	"plikTekstowy.h"
+
+1567850729 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\plikzadresatami.cpp
+	"PlikZAdresatami.h"
+
+1567850729 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\plikzuzytkownikami.cpp
+	"PlikZUzytkownikami.h"
+
+1567352372 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\uzytkownik.cpp
+	"Uzytkownik.h"
+
+1567848571 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\uzytkownikmenedzer.cpp
+	"UzytkownikMenedzer.h"
+
+1570993496 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\user.cpp
+	"User.h"
+
+1570993496 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\user.h
+	<iostream>
+
+1570989694 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\income.cpp
+	"Income.h"
+
+1570989694 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\income.h
+	<string>
+
+1570994433 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\textfile.cpp
+	"TextFile.h"
+
+1570830098 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\textfile.h
+	<iostream>
+	<fstream>
+
+1570994591 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\additionalfunctions.cpp
+	"AdditionalFunctions.h"
+
+1570991307 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\additionalfunctions.h
+	<iostream>
+	<sstream>
+	<algorithm>
+	<fstream>
+
+1570996240 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithusers.cpp
+	"FileWithUsers.h"
+
+1570993174 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithusers.h
+	<fstream>
+	<sstream>
+	<iostream>
+	<string>
+	"User.h"
+	"AdditionalFunctions.h"
+	"vector"
+	"TextFile.h"
+
+1570994433 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithincomes.cpp
+	"FileWithIncomes.h"
+
+1570996713 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithincomes.h
+	"Income.h"
+	<vector>
+	<fstream>
+	<iostream>
+	"AdditionalFunctions.h"
+	"TextFile.h"
+
+1570992176 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\incomesmanager.cpp
+	"IncomesManager.h"
+
+1570996103 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\incomesmanager.h
+	<vector>
+	"Income.h"
+	"FileWithIncomes.h"
+
+1570993391 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\finances.h
+	<iostream>
+	"UsersManager.h"
+	"IncomesManager.h"
+
+1570994172 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\usersmanager.h
+	<iostream>
+	<vector>
+	<windows.h>
+	"User.h"
+	"FileWithUsers.h"
+
+1570993417 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\finances.cpp
+	"Finances.h"
+
+1570994196 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\usersmanager.cpp
+	"UsersManager.h"
+
