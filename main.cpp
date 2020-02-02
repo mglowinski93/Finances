@@ -10,7 +10,7 @@ const int TIME_TO_SLEEP = 2000;
 
 int main()
 {
-    Finances finances("Users,xml", "Incomes.xml", "Expenses.xml");
+    Finances finances("Users.xml", "Incomes.xml", "Expenses.xml");
     User loggedUser;
     char choice;
     while(true)
@@ -40,19 +40,18 @@ int main()
             switch (choice)
             {
             case '1':
-                //finances.addIncome(loggedUser.getId());
+                finances.addIncome(loggedUser.getId());
                 break;
             case '2':
-                //finances.wyszukajIncomeowPoImieniu();
+                finances.addExpense(loggedUser.getId());
                 break;
             case '3':
                 //finances.wyszukajIncomeowPoNazwisku();
                 break;
             case '4':
-                //finances.showAllIncomes();
+                finances.showAllIncomes();
                 break;
             case '5':
-                //finances.removeIncome();
                 break;
             case '7':
                 finances.changePasswordOfLoggedUser(loggedUser);

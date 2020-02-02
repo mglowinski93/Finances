@@ -65,6 +65,8 @@ char AdditionalFunctions::getChar()
 {
     string input = "";
     char singleChar  = {0};
+    cin.clear();
+    fflush(stdin);
 
     while (true)
     {
@@ -78,17 +80,6 @@ char AdditionalFunctions::getChar()
         cout << "This is not single choice. Try one more time." << endl;
     }
     return singleChar;
-}
-
-string AdditionalFunctions::getNumber(string text, int charPosition)
-{
-    string number = "";
-    while(isdigit(text[charPosition]) == true)
-    {
-        number += text[charPosition];
-        charPosition ++;
-    }
-    return number;
 }
 
 string AdditionalFunctions::charPosition(string text)
@@ -141,12 +132,60 @@ void AdditionalFunctions::changeFileName(string oldFileName, string newFileName)
     }
 }
 
-string AdditionalFunctions::makeFirstLetterBig(string text)
+string AdditionalFunctions::getCurrentDate()
 {
-    if (!text.empty())
+    time_t now = time(0);
+    struct tm  tstruct;
+    char buf[80];
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "%Y-%m-%d", &tstruct);
+    return buf;
+}
+
+bool AdditionalFunctions::isLeap(int year)
+{
+    return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
+}
+
+bool AdditionalFunctions::checkIfDateIsValid(string date)
+{
+    int y = fromStringToInt(date.substr(0,4));
+    int m = fromStringToInt(date.substr(5,2));
+    int d = fromStringToInt(date.substr(8,2));
+    if (y > 9999 || y < 1800)
+        return false;
+
+    if (m < 1 || m > 12)
+        return false;
+
+    if (d < 1 || d > 31)
+        return false;
+
+    if (m == 2)
     {
-        transform(text.begin(), text.end(), text.begin(), ::tolower);
-        text[0] = toupper(text[0]);
+        if(isLeap(y))
+        {
+            return (d <= 29);
+        }else
+        {
+            return (d <= 28);
+        }
     }
-    return text;
+
+    if (m == 4 || m == 6 ||
+        m == 9 || m == 11)
+        return (d <= 30);
+
+    return true;
+}
+
+string AdditionalFunctions::getAmountString()
+{
+    string rawAmount = getLine();
+    for(int i=0; i < rawAmount.size(); i++)
+    {
+        if(rawAmount[i] == ',')
+            rawAmount[i] = '.';
+    }
+    return rawAmount;
 }

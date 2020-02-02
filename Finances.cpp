@@ -9,14 +9,19 @@ User Finances::loginUser()
 {
     User temp = usersManager.loginUser();
     if(usersManager.checkIfUserLoggedIn())
+    {
         incomesManager = new IncomesManager(INCOMES_FILE_NAME, temp.getId());
+        expensesManager = new ExpensesManager(EXPENSES_FILE_NAME, temp.getId());
+    }
     return temp;
 }
 
 User Finances::logoutUser()
 {
     delete incomesManager;
+    delete expensesManager;
     incomesManager = NULL;
+    expensesManager = NULL;
     return usersManager.logoutUser();
 }
 
@@ -32,21 +37,10 @@ void Finances::showAllIncomes()
 
 void Finances::addIncome(int loggedUserId)
 {
-    if(usersManager.checkIfUserLoggedIn())
-    {
-        incomesManager -> addIncome();
-    }else
-    {
-        cout << "First you need to be logged in. "<<endl;
-    }
+    incomesManager -> addIncome();
 }
 
-void Finances::removeIncome()
+void Finances::addExpense(int loggedUserId)
 {
-    incomesManager -> removeIncome();
-}
-
-void Finances::editIncome()
-{
-    incomesManager -> editIncome();
+    expensesManager -> addExpense();
 }

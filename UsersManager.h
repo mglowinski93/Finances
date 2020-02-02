@@ -24,7 +24,7 @@ class UsersManager
     public:
     UsersManager(string userFileName):fileWithUsers(userFileName)
     {
-        users = fileWithUsers.wczytajUserowZPliku();
+        users = fileWithUsers.loadUsersFromFile();
     };
     void registerUser();
     User loginUser();

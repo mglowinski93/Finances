@@ -1,10 +1,10 @@
-#ifndef INCOME_H
-#define INCOME_H
+#ifndef EXPENSE_H
+#define EXPENSE_H
 #include <string>
 
 using namespace std;
 
-class Income
+class Expense
 {
     private:
         int id;
@@ -25,7 +25,6 @@ class Income
         void setTitle(string);
         void setAmount(string);
         void setDate(string);
-
 };
 
-#endif // INCOME
+#endif // EXPENSE_H

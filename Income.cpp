@@ -1,71 +1,52 @@
 #include "Income.h"
 
-int Income::getId()
+int Income::getId() const
 {
     return id;
 }
 
-int Income::getUserId()
+int Income::getUserId() const
 {
     return userId;
 }
 
-string Income::getName()
+string Income::getTitle() const
 {
-    return name;
+    return title;
 }
 
-string Income::getSurname()
+string Income::getAmount() const
 {
-    return surname;
+    return amount;
 }
 
-string Income::getPhoneNumber()
+string Income::getDate() const
 {
-    return phoneNumber;
-}
-
-string Income::getEmail()
-{
-    return email;
-}
-
-string Income::getAddress()
-{
-    return adres;
+    return date;
 }
 
 void Income::setId(int id)
 {
-  this->id = id;
+  this -> id = id;
 }
 
 void Income::setUserId(int userId)
 {
-    this->userId = userId;
+    this -> userId = userId;
 }
 
-void Income::setName(string name)
+void Income::setTitle(string title)
 {
-    this-> name = name;
+    this -> title = title;
 }
 
-void Income::setSurname(string surname)
+void Income::setAmount(string amount)
 {
-    this->surname = surname;
+    this -> amount = amount;
 }
 
-void Income::setPhoneNumber(string phoneNumber)
+void Income::setDate(string date)
 {
- this->phoneNumber = phoneNumber;
+    this -> date = date;
 }
 
-void Income::setEmail(string email)
-{
-    this->email = email;
-}
-
-void Income::setAddress(string adres)
-{
-    this->adres = adres;
-}

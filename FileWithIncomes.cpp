@@ -4,98 +4,61 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUser(int loggedUserId)
 {
     Income income;
     vector <Income> incomes;
-    string dataSingleIncomeSplittedVerticaly = "";
-    fstream textFile;
-    textFile.open(getFileName().c_str(), ios::in);
 
-    if (textFile.good() == true)
+    CMarkup xml;
+    if(xml.Load( MCD_T(getFileName().c_str())))
     {
-        while (getline(textFile, dataSingleIncomeSplittedVerticaly))
+        int incomeId = -1;
+        xml.FindElem(); // INCOME element is root
+        xml.IntoElem(); // inside ORDER
+        while( xml.FindElem(INCOME_STRING))
         {
-            if(loggedUserId == getUserIdFromDataLine(dataSingleIncomeSplittedVerticaly))
+            xml.FindChildElem(INCOME_ID_STRING);
+            incomeId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
+            xml.FindChildElem(USER_ID_STRING);
+            int assignedUserId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
+            if(loggedUserId == assignedUserId)
             {
-                income = getIncomeData(dataSingleIncomeSplittedVerticaly);
+                income.setId(incomeId);
+                income.setUserId(assignedUserId);
+                xml.FindChildElem(TITLE_STRING);
+                income.setTitle(xml.GetChildData());
+                xml.FindChildElem(AMOUNT_STRING);
+                income.setAmount(xml.GetChildData());
+                xml.FindChildElem(DATE_STRING);
+                income.setDate(xml.GetChildData());
                 incomes.push_back(income);
             }
-            lastIncomeId = getIncomeIdFromDataSplittedWithLines(dataSingleIncomeSplittedVerticaly);
         }
+        lastIncomeId = incomeId;
     }
-    else
-        cout << "Failed to load data from file" << endl;
 
-    textFile.close();
     return incomes;
 }
 
-Income FileWithIncomes::getIncomeData(string IncomeDataSplittedVerticaly)
+void FileWithIncomes::saveIncomeToFile(const Income income)
 {
-    Income income;
-    string singleIncomeData = "";
-    int numberOfSingleIncomeLine = 1;
-
-    for (int charPosition = 0; charPosition < IncomeDataSplittedVerticaly.length(); charPosition++)
+    CMarkup xml;
+    if (!xml.Load(getFileName().c_str()))
     {
-        if (IncomeDataSplittedVerticaly[charPosition] != '|')
-        {
-            singleIncomeData += IncomeDataSplittedVerticaly[charPosition];
-        }
-        else
-        {
-            switch(numberOfSingleIncomeLine)
-            {
-            case 1:
-                income.setId(atoi(singleIncomeData.c_str()));
-                break;
-            case 2:
-                income.setUserId(atoi(singleIncomeData.c_str()));
-                break;
-            case 3:
-                income.setName(singleIncomeData);
-                break;
-            case 4:
-                income.setSurname(singleIncomeData);
-                break;
-            case 5:
-                income.setPhoneNumber(singleIncomeData);
-                break;
-            case 6:
-                income.setEmail(singleIncomeData);
-                break;
-            case 7:
-                income.setAddress(singleIncomeData);
-                break;
-            }
-            singleIncomeData = "";
-            numberOfSingleIncomeLine++;
-        }
+       xml.AddElem(INCOMES_STRING);
+    }else
+    {
+       xml.FindElem();
     }
-    return income;
+
+    xml.IntoElem();
+    xml.AddElem(INCOME_STRING);
+    xml.IntoElem();
+    xml.AddElem(INCOME_ID_STRING, income.getId());
+    xml.AddElem(USER_ID_STRING, income.getUserId());
+    xml.AddElem(TITLE_STRING, income.getTitle());
+    xml.AddElem(AMOUNT_STRING, income.getAmount());
+    xml.AddElem(DATE_STRING, income.getDate());
+    xml.OutOfElem();
+    xml.Save(getFileName().c_str());
 }
 
-int FileWithIncomes::getIncomeIdFromDataSplittedWithLines(string dataSingleIncomeSplittedVerticaly)
-{
-    int pozycjaRozpoczeciaIdIncomea = 0;
-    int idIncomea = AdditionalFunctions::fromStringToInt(AdditionalFunctions::getNumber(dataSingleIncomeSplittedVerticaly, pozycjaRozpoczeciaIdIncomea));
-    return idIncomea;
-}
-
-int FileWithIncomes::getUserIdFromDataLine(string dataSingleIncomeSplittedVerticaly)
-{
-    int pozycjaRozpoczeciaIdUsera = dataSingleIncomeSplittedVerticaly.find_first_of('|') + 1;
-    int userId = AdditionalFunctions::fromStringToInt(AdditionalFunctions::getNumber(dataSingleIncomeSplittedVerticaly, pozycjaRozpoczeciaIdUsera));
-
-    return userId;
-}
-
-void FileWithIncomes::addIncome(int loggedUserId, vector <Income> &incomes)
-{
-    Income income;
-    system("cls");
-    cout << " >>> ADDING NEW INCOME <<<" << endl << endl;
-    income = enterDataForNewIncome(loggedUserId);
-    incomes.push_back(income);
-    addIncomeToFile(income);
-}
 
 Income FileWithIncomes::enterDataForNewIncome(int loggedUserId)
 {
@@ -104,100 +67,41 @@ Income FileWithIncomes::enterDataForNewIncome(int loggedUserId)
     income.setId(++lastIncomeId);
     income.setUserId(loggedUserId);
 
-    cout << "Type name: ";
-    income.setName(AdditionalFunctions::getLine());
-    income.setName(AdditionalFunctions::makeFirstLetterBig(income.getName()));
+    cout << "Type title: ";
+    income.setTitle(AdditionalFunctions::getLine());
 
-    cout << "Type surname: ";
-    income.setSurname(AdditionalFunctions::getLine());
-    income.setSurname(AdditionalFunctions::makeFirstLetterBig(income.getSurname()));
+    cout << "Type amount: ";
+    income.setAmount(AdditionalFunctions::getAmountString());
 
-    cout << "Type phone number: ";
-    income.setPhoneNumber(AdditionalFunctions::getLine());
+    cout << "Is it income from today? [y/n]: ";
+    string userInput;
+    string incomeDate;
+    cin >> userInput;
+    if(userInput == "y" || userInput == "yes")
+    {
+        incomeDate = AdditionalFunctions::getCurrentDate();
+    }else
+    {
+        cout << "Type date: ";
+        cin >> incomeDate;
+        while(!AdditionalFunctions::checkIfDateIsValid(incomeDate))
+        {
+            cout << "Date invalid. Type one more time: "<< endl;
+            cin >> incomeDate;
+        }
+    }
+    income.setDate(incomeDate);
 
-    cout << "Type email: ";
-    income.setEmail(AdditionalFunctions::getLine());
-
-    cout << "Type address: ";
-    income.setAddress(AdditionalFunctions::getLine());
     return income;
 }
 
-void FileWithIncomes::addIncomeToFile(Income income)
+
+void FileWithIncomes::addIncome(int loggedUserId, vector <Income> &incomes)
 {
-    string lineWithIncomeData = "";
-    fstream textFile;
-    textFile.open(getFileName().c_str(), ios::out | ios::app);
-
-    if (textFile.good() == true)
-    {
-        if (checkIfFileEmpty() == true)
-        {
-            textFile << lineWithIncomeData << endl;
-        }
-        else
-        {
-            textFile << lineWithIncomeData << endl;
-        }
-    }
-    else
-    {
-        cout << "Failed to open file and save data." << endl;
-    }
-    textFile.close();
-}
-
-void FileWithIncomes::removeIncomeZPliku(int IncomeBeingRemovedId)
-{
-    fstream readTextFile, tempTextFile;
-    string loadedLine = "";
-    string ostatniZapisanyIncome;
-    int numerWczytanejLinii = 1;
-
-    readTextFile.open(getFileName().c_str(), ios::in);
-    tempTextFile.open(tempFileWithIncomes.c_str(), ios::out | ios::app);
-
-    if (readTextFile.good() == true)
-    {
-        while (getline(readTextFile, loadedLine))
-        {
-            if(getIncomeIdFromDataSplittedWithLines(loadedLine) != IncomeBeingRemovedId)
-            {
-                tempTextFile << loadedLine <<endl;
-                ostatniZapisanyIncome = loadedLine;
-            }
-        }
-        readTextFile.close();
-        tempTextFile.close();
-        AdditionalFunctions::removeFile(getFileName());
-        AdditionalFunctions::changeFileName(tempFileWithIncomes, getFileName());
-    }
-}
-
-void FileWithIncomes::updateChosenIncomeData(Income income)
-{
-    fstream readTextFile, tempTextFile;
-    string loadedLine = "";
-    int numerWczytanejLinii = 1;
-
-    readTextFile.open(getFileName().c_str(), ios::in);
-    tempTextFile.open(tempFileWithIncomes.c_str(), ios::out | ios::app);
-
-    if (readTextFile.good() == true)
-    {
-        while (getline(readTextFile, loadedLine))
-        {
-            if(getIncomeIdFromDataSplittedWithLines(loadedLine) != income.getId())
-            {
-                //tempTextFile << loadedLine <<endl;
-            }else
-            {
-                //tempTextFile << zamienDaneIncomeaNaLinieZDanymiOddzielonymiPionowymiKreskami(income) << endl;
-            }
-        }
-        readTextFile.close();
-        tempTextFile.close();
-        AdditionalFunctions::removeFile(getFileName());
-        AdditionalFunctions::changeFileName(tempFileWithIncomes, getFileName());
-    }
+    system("cls");
+    cout << " >>> ADDING NEW INCOME <<<" << endl << endl;
+    Income newIncome = enterDataForNewIncome(loggedUserId);
+    incomes.push_back(newIncome);
+    saveIncomeToFile(newIncome);
+    cout << "Income added";
 }

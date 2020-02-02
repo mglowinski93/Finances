@@ -34,6 +34,12 @@
 		</Compiler>
 		<Unit filename="AdditionalFunctions.cpp" />
 		<Unit filename="AdditionalFunctions.h" />
+		<Unit filename="Expense.cpp" />
+		<Unit filename="Expense.h" />
+		<Unit filename="ExpensesManager.cpp" />
+		<Unit filename="ExpensesManager.h" />
+		<Unit filename="FileWithExpenses.cpp" />
+		<Unit filename="FileWithExpenses.h" />
 		<Unit filename="FileWithIncomes.cpp" />
 		<Unit filename="FileWithIncomes.h" />
 		<Unit filename="FileWithUsers.cpp" />
@@ -44,12 +50,14 @@
 		<Unit filename="Income.h" />
 		<Unit filename="IncomesManager.cpp" />
 		<Unit filename="IncomesManager.h" />
-		<Unit filename="TextFile.cpp" />
-		<Unit filename="TextFile.h" />
+		<Unit filename="Markup.cpp" />
+		<Unit filename="Markup.h" />
 		<Unit filename="User.cpp" />
 		<Unit filename="User.h" />
 		<Unit filename="UsersManager.cpp" />
 		<Unit filename="UsersManager.h" />
+		<Unit filename="XmlFile.cpp" />
+		<Unit filename="XmlFile.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

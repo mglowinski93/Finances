@@ -43,6 +43,16 @@ User UsersManager::addNewUser()
     cin >> password;
     user.setPassword(password);
 
+    cout << "Type name: ";
+    string name;
+    cin >> name;
+    user.setName(name);
+
+    cout << "Type surname: ";
+    string surname;
+    cin >> surname;
+    user.setSurname(surname);
+
     return user;
 }
 
@@ -85,7 +95,7 @@ User UsersManager::loginUser()
         {
             for (int triesCounter = 3; triesCounter > 0; triesCounter--)
             {
-                cout << "Type password. Tries left: " << triesCounter << ": ";
+                cout << "Type password: ";
                 password = AdditionalFunctions::getLine();
 
                 if (itr -> getPassword() == password)
@@ -93,6 +103,9 @@ User UsersManager::loginUser()
                     cout << endl << "Logged in" << endl << endl;
                     loggedUserId = itr->getId();
                     return *itr;
+                }else
+                {
+                    cout << "Tries left: " << triesCounter-1 << endl;
                 }
             }
             cout << "Wrong password was typed 3 times" << endl;

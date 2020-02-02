@@ -1,31 +1,33 @@
-#ifndef PLIK_Z_ADRESATAMI_H
-#define PLIK_Z_ADRESATAMI_H
+#ifndef FILE_WITH_INCOMES_H
+#define FILE_WITH_INCOMES_H
 
 #include "Income.h"
 #include <vector>
 #include <fstream>
 #include <iostream>
 #include "AdditionalFunctions.h"
-#include "TextFile.h"
+#include "XmlFile.h"
 
 using namespace std;
 
-class FileWithIncomes : public TextFile
+class FileWithIncomes : public XmlFile
 {
-private:
-    const string tempFileWithIncomes = "tempFileWithIncomes.txt";
-    int lastIncomeId;
-    Income getIncomeData(string IncomeDataSplittedVerticaly);
-    int getIncomeIdFromDataSplittedWithLines(string dataSingleIncomeSplittedVerticaly);
-    int getUserIdFromDataLine(string dataSingleIncomeSplittedVerticaly);
-    Income enterDataForNewIncome(int loggedUserId);
-    void addIncomeToFile(Income income);
-public:
-    FileWithIncomes(string fileName) : TextFile(fileName), lastIncomeId(0){};
-    vector <Income> loadIncomesOfLoggedUser(int loggedUserId);
-    void addIncome(int loggedUserId, vector <Income> &incomes);
-    void removeIncomeZPliku(int IncomeBeingRemovedId);
-    void updateChosenIncomeData(Income income);
+    private:
+        string INCOMES_STRING = "INCOMES";
+        string INCOME_STRING = "INCOME";
+        string INCOME_ID_STRING = "INCOME_ID";
+        string USER_ID_STRING = "USER_ID";
+        string TITLE_STRING = "TITLE";
+        string AMOUNT_STRING = "AMOUNT";
+        string DATE_STRING = "DATE";
+        int lastIncomeId;
+        void saveIncomeToFile(const Income);
+        Income enterDataForNewIncome(int);
+
+    public:
+        FileWithIncomes(string fileName) : XmlFile(fileName), lastIncomeId(0){};
+        vector <Income> loadIncomesOfLoggedUser(int loggedUserId);
+        void addIncome(int loggedUserId, vector <Income> &incomes);
 };
 
 #endif

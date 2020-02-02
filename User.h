@@ -1,5 +1,5 @@
-#ifndef UZYTKOWNIK_H
-#define UZYTKOWNIK_H
+#ifndef USER_FILE_H
+#define USER_FILE_H
 
 #include <iostream>
 
@@ -10,16 +10,22 @@ class User
 private:
     int id;
     string login;
-    string haslo;
+    string password;
+    string name;
+    string surname;
 
     public:
     User();
     int getId();
     string getLogin();
     string getPassword();
-    void setId(int noweId);
-    void setLogin(string nowyLogin);
-    void setPassword(string newPassword);
+    string getName();
+    string getSurname();
+    void setId(int id);
+    void setLogin(string login);
+    void setPassword(string password);
+    void setName(string name);
+    void setSurname(string surname);
 };
 
 #endif

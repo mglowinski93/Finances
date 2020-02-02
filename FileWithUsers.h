@@ -8,22 +8,26 @@
 #include "User.h"
 #include "AdditionalFunctions.h"
 #include "vector"
-#include "TextFile.h"
+#include "XmlFile.h"
 
 using namespace std;
 
-class FileWithUsers : public TextFile
+class FileWithUsers : public XmlFile
 {
 private:
-    string zamienDaneUseraNaLinieZDanymiOddzielonaPionowymiKreskami(User user);
-    User pobierzDaneUsera(string daneJednegoUseraOddzielonePionowymiKreskami);
+    string USER_ID_STRING = "USER_ID";
+    string USERS_STRING = "USERS";
+    string USER_STRING = "USER";
+    string NAME_STRING = "NAME";
+    string SURNAME_STRING = "SURNAME";
+    string LOGIN_STRING = "LOGIN";
+    string PASSWORD_STRING = "PASSWORD";
 
 public:
-    FileWithUsers(string userFileName): TextFile(userFileName){};
+    FileWithUsers(string userFileName): XmlFile(userFileName){};
     void addUserToFile(User user);
-    vector <User> wczytajUserowZPliku();
-    void saveAllUsersToFile(vector <User
-                                       > users);
+    vector <User> loadUsersFromFile();
+    void saveAllUsersToFile(vector <User> users);
 };
 
 #endif // PLIK_Z_UZYTKOWNIKAMI

@@ -1,5 +1,5 @@
-#ifndef ADRESAT_MENEDZER_H
-#define ADRESAT_MENEDZER_H
+#ifndef INCOME_MANAGER_H
+#define INCOME_MANAGER_H
 
 #include <vector>
 #include "Income.h"
@@ -9,24 +9,20 @@ using namespace std;
 
 class IncomesManager
 {
+
 private:
-    const int ID_ZALOGOWANEGO_UZYTKOWNIKA;
+    const int LOGGED_USER_ID;
     vector <Income> incomes;
     FileWithIncomes fileWithIncomes;
-    void wyswietlDaneIncomea(Income income);
-    int podajIdWybranegoIncomea();
-    char wybierzOpcjeZMenuEdycja();
-    void wyswietlIloscWyszukanychIncomeow(int iloscIncomeow);
+    void showIncome(Income);
+
 public:
-   IncomesManager(string incomeFileName, int idZalogwanegoUsera)
-   : fileWithIncomes(incomeFileName), ID_ZALOGOWANEGO_UZYTKOWNIKA(idZalogwanegoUsera)
-   {
-    incomes = fileWithIncomes.loadIncomesOfLoggedUser(ID_ZALOGOWANEGO_UZYTKOWNIKA);
-   };
-   void showAllIncomes();
-   void addIncome();
-   void removeIncome();
-   void editIncome();
+    IncomesManager(string incomeFileName, int loggedUserId): fileWithIncomes(incomeFileName), LOGGED_USER_ID(loggedUserId)
+    {
+       incomes = fileWithIncomes.loadIncomesOfLoggedUser(LOGGED_USER_ID);
+    };
+    void showAllIncomes();
+    void addIncome();
 };
 
-#endif
+#endif // INCOME_MANAGER
