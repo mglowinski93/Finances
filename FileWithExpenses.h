@@ -21,7 +21,7 @@ private:
         string AMOUNT_STRING = "AMOUNT";
         string DATE_STRING = "DATE";
         int lastExpenseId;
-        void saveExpenseToFile(const Expense);
+        void saveExpensesToFile(const vector <Expense> &expenses);
         Expense enterDataForNewExpense(int);
 
 public:

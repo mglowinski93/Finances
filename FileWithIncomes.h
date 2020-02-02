@@ -21,7 +21,7 @@ class FileWithIncomes : public XmlFile
         string AMOUNT_STRING = "AMOUNT";
         string DATE_STRING = "DATE";
         int lastIncomeId;
-        void saveIncomeToFile(const Income);
+        void saveIncomesToFile(const vector <Income> &incomes);
         Income enterDataForNewIncome(int);
 
     public:

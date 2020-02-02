@@ -46,10 +46,10 @@ int main()
                 finances.addExpense(loggedUser.getId());
                 break;
             case '3':
-                //finances.wyszukajIncomeowPoNazwisku();
+                finances.showCurrentMonthBalance();
                 break;
             case '4':
-                finances.showAllIncomes();
+                finances.showPreviousMonthBalance();
                 break;
             case '5':
                 break;

@@ -26,7 +26,7 @@ vector <Expense> FileWithExpenses::loadExpensesOfLoggedUser(int loggedUserId)
                 xml.FindChildElem(AMOUNT_STRING);
                 expense.setAmount(xml.GetChildData());
                 xml.FindChildElem(DATE_STRING);
-                expense.setDate(xml.GetChildData());
+                expense.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
                 expenses.push_back(expense);
             }
         }
@@ -36,26 +36,22 @@ vector <Expense> FileWithExpenses::loadExpensesOfLoggedUser(int loggedUserId)
     return expenses;
 }
 
-void FileWithExpenses::saveExpenseToFile(const Expense expense)
+void FileWithExpenses::saveExpensesToFile(const vector <Expense> &expenses)
 {
     CMarkup xml;
-    if (!xml.Load(getFileName().c_str()))
+    xml.AddElem(EXPENSES_STRING);
+    xml.IntoElem();
+    for(vector<Expense>::const_iterator it = expenses.begin(); it != expenses.end(); ++it)
     {
-       xml.AddElem(EXPENSES_STRING);
-    }else
-    {
-       xml.FindElem();
+        xml.AddElem(EXPENSE_STRING);
+        xml.IntoElem();
+        xml.AddElem(EXPENSE_ID_STRING, it -> getId());
+        xml.AddElem(USER_ID_STRING, it -> getUserId());
+        xml.AddElem(TITLE_STRING, it -> getTitle());
+        xml.AddElem(AMOUNT_STRING, it -> getAmount());
+        xml.AddElem(DATE_STRING, AdditionalFunctions::convertDateFromIntToString(it -> getDate()));
+        xml.OutOfElem();
     }
-
-    xml.IntoElem();
-    xml.AddElem(EXPENSE_STRING);
-    xml.IntoElem();
-    xml.AddElem(EXPENSE_ID_STRING, expense.getId());
-    xml.AddElem(USER_ID_STRING, expense.getUserId());
-    xml.AddElem(TITLE_STRING, expense.getTitle());
-    xml.AddElem(AMOUNT_STRING, expense.getAmount());
-    xml.AddElem(DATE_STRING, expense.getDate());
-    xml.OutOfElem();
     xml.Save(getFileName().c_str());
 }
 
@@ -90,7 +86,7 @@ Expense FileWithExpenses::enterDataForNewExpense(int loggedUserId)
             cin >> expenseDate;
         }
     }
-    expense.setDate(expenseDate);
+    expense.setDate(AdditionalFunctions::convertDateFromStringToInt(expenseDate));
 
     return expense;
 }
@@ -102,6 +98,7 @@ void FileWithExpenses::addExpense(int loggedUserId, vector <Expense> &expenses)
     cout << " >>> ADDING NEW EXPENSE <<<" << endl << endl;
     Expense newExpense = enterDataForNewExpense(loggedUserId);
     expenses.push_back(newExpense);
-    saveExpenseToFile(newExpense);
+    sort(expenses.begin(), expenses.end());
+    saveExpensesToFile(expenses);
     cout << "Expense added";
 }

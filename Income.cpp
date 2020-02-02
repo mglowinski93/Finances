@@ -20,7 +20,7 @@ string Income::getAmount() const
     return amount;
 }
 
-string Income::getDate() const
+int Income::getDate() const
 {
     return date;
 }
@@ -45,7 +45,7 @@ void Income::setAmount(string amount)
     this -> amount = amount;
 }
 
-void Income::setDate(string date)
+void Income::setDate(int date)
 {
     this -> date = date;
 }

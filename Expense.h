@@ -11,20 +11,24 @@ class Expense
         int userId;
         string title;
         string amount;
-        string date;
+        int date;
 
     public:
         int getId() const;
         int getUserId() const;
         string getTitle() const;
         string getAmount() const;
-        string getDate() const;
+        int getDate() const;
 
         void setId(int);
         void setUserId(int);
         void setTitle(string);
         void setAmount(string);
-        void setDate(string);
+        void setDate(int);
+        bool operator < (const Expense &compareExpense)
+        {
+            return this -> getDate() < compareExpense.getDate();
+        }
 };
 
 #endif // EXPENSE_H

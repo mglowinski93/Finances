@@ -40,7 +40,21 @@ void Finances::addIncome(int loggedUserId)
     incomesManager -> addIncome();
 }
 
+void Finances::showAllExpenses()
+{
+    expensesManager -> showAllExpenses();
+}
+
 void Finances::addExpense(int loggedUserId)
 {
     expensesManager -> addExpense();
+}
+
+void Finances::showCurrentMonthBalance()
+{
+
+}
+
+void Finances::showPreviousMonthBalance()
+{
 }

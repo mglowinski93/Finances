@@ -26,7 +26,7 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUser(int loggedUserId)
                 xml.FindChildElem(AMOUNT_STRING);
                 income.setAmount(xml.GetChildData());
                 xml.FindChildElem(DATE_STRING);
-                income.setDate(xml.GetChildData());
+                income.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
                 incomes.push_back(income);
             }
         }
@@ -36,26 +36,22 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUser(int loggedUserId)
     return incomes;
 }
 
-void FileWithIncomes::saveIncomeToFile(const Income income)
+void FileWithIncomes::saveIncomesToFile(const vector <Income> &incomes)
 {
     CMarkup xml;
-    if (!xml.Load(getFileName().c_str()))
+    xml.AddElem(INCOMES_STRING);
+    xml.IntoElem();
+    for(vector<Income>::const_iterator it = incomes.begin(); it != incomes.end(); ++it)
     {
-       xml.AddElem(INCOMES_STRING);
-    }else
-    {
-       xml.FindElem();
+        xml.AddElem(INCOME_STRING);
+        xml.IntoElem();
+        xml.AddElem(INCOME_ID_STRING, it -> getId());
+        xml.AddElem(USER_ID_STRING, it -> getUserId());
+        xml.AddElem(TITLE_STRING, it -> getTitle());
+        xml.AddElem(AMOUNT_STRING, it -> getAmount());
+        xml.AddElem(DATE_STRING, AdditionalFunctions::convertDateFromIntToString(it -> getDate()));
+        xml.OutOfElem();
     }
-
-    xml.IntoElem();
-    xml.AddElem(INCOME_STRING);
-    xml.IntoElem();
-    xml.AddElem(INCOME_ID_STRING, income.getId());
-    xml.AddElem(USER_ID_STRING, income.getUserId());
-    xml.AddElem(TITLE_STRING, income.getTitle());
-    xml.AddElem(AMOUNT_STRING, income.getAmount());
-    xml.AddElem(DATE_STRING, income.getDate());
-    xml.OutOfElem();
     xml.Save(getFileName().c_str());
 }
 
@@ -90,7 +86,8 @@ Income FileWithIncomes::enterDataForNewIncome(int loggedUserId)
             cin >> incomeDate;
         }
     }
-    income.setDate(incomeDate);
+
+    income.setDate(AdditionalFunctions::convertDateFromStringToInt(incomeDate));
 
     return income;
 }
@@ -102,6 +99,7 @@ void FileWithIncomes::addIncome(int loggedUserId, vector <Income> &incomes)
     cout << " >>> ADDING NEW INCOME <<<" << endl << endl;
     Income newIncome = enterDataForNewIncome(loggedUserId);
     incomes.push_back(newIncome);
-    saveIncomeToFile(newIncome);
+    sort(incomes.begin(), incomes.end());
+    saveIncomesToFile(incomes);
     cout << "Income added";
 }

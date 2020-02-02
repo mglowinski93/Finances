@@ -82,32 +82,6 @@ char AdditionalFunctions::getChar()
     return singleChar;
 }
 
-string AdditionalFunctions::charPosition(string text)
-{
-    if (!text.empty())
-    {
-        transform(text.begin(), text.end(), text.begin(), ::tolower);
-        text[0] = toupper(text[0]);
-    }
-    return text;
-}
-
-int AdditionalFunctions::getIntNumber()
-{
-    string input = "";
-    int number = 0;
-    while (true)
-    {
-        getline(cin, input);
-
-        stringstream myStream(input);
-        if (myStream >> number)
-            break;
-        cout << "This is not a number. Try one more time" << endl;
-    }
-    return number;
-}
-
 void AdditionalFunctions::removeFile(string fileName)
 {
     if (remove(fileName.c_str()) == 0)
@@ -152,7 +126,7 @@ bool AdditionalFunctions::checkIfDateIsValid(string date)
     int y = fromStringToInt(date.substr(0,4));
     int m = fromStringToInt(date.substr(5,2));
     int d = fromStringToInt(date.substr(8,2));
-    if (y > 9999 || y < 1800)
+    if (y > 9999 || y < 2000)
         return false;
 
     if (m < 1 || m > 12)
@@ -176,6 +150,12 @@ bool AdditionalFunctions::checkIfDateIsValid(string date)
         m == 9 || m == 11)
         return (d <= 30);
 
+    //There is requirement that date must be from the same month
+    string currentDate = getCurrentDate();
+    if(fromStringToInt(currentDate.substr(0,4)) < y || fromStringToInt(currentDate.substr(5,2)) < m)
+        return false;
+
+
     return true;
 }
 
@@ -188,4 +168,24 @@ string AdditionalFunctions::getAmountString()
             rawAmount[i] = '.';
     }
     return rawAmount;
+}
+
+int AdditionalFunctions::convertDateFromStringToInt(string date)
+{
+    string rawDateString;
+    for(size_t i = 0; i < date.size(); ++i)
+        if(date[i] != '-') rawDateString += date[i];
+    return fromStringToInt(rawDateString);
+}
+
+string AdditionalFunctions::convertDateFromIntToString(int date)
+{
+    string year = fromIntToString(date/10000%10000);
+    string month = fromIntToString(date/100%100);
+    string day = fromIntToString(date%100);
+    if(month.size() == 1)
+            month = "0" + month;
+    if(day.size() == 1)
+        day = "0" + day;
+    return year + "-" + month + "-" + day;
 }
