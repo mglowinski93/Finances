@@ -13,7 +13,10 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUser(int loggedUserId)
         while( xml.FindElem(INCOME_STRING))
         {
             xml.FindChildElem(INCOME_ID_STRING);
-            income.setId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
+            int readedIncomeId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
+            if(readedIncomeId > lastIncomeId)
+                lastIncomeId = readedIncomeId;
+            income.setId(readedIncomeId);
             xml.FindChildElem(USER_ID_STRING);
             income.setUserId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
             xml.FindChildElem(TITLE_STRING);
@@ -24,7 +27,6 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUser(int loggedUserId)
             income.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
             incomes.push_back(income);
         }
-        lastIncomeId = incomes.back().getId();
     }
 
     return incomes;

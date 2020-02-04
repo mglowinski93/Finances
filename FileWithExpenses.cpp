@@ -4,7 +4,6 @@ vector <Expense> FileWithExpenses::loadExpensesOfLoggedUser(int loggedUserId)
 {
     Expense expense;
     vector <Expense> expenses;
-
     CMarkup xml;
     if(xml.Load( MCD_T(getFileName().c_str())))
     {
@@ -13,7 +12,10 @@ vector <Expense> FileWithExpenses::loadExpensesOfLoggedUser(int loggedUserId)
         while(xml.FindElem(EXPENSE_STRING))
         {
             xml.FindChildElem(EXPENSE_ID_STRING);
-            expense.setId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
+            int readedExpenseId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
+            if(readedExpenseId > lastExpenseId)
+                lastExpenseId = readedExpenseId;
+            expense.setId(readedExpenseId);
             xml.FindChildElem(USER_ID_STRING);
             expense.setUserId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
             xml.FindChildElem(TITLE_STRING);
@@ -24,7 +26,6 @@ vector <Expense> FileWithExpenses::loadExpensesOfLoggedUser(int loggedUserId)
             expense.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
             expenses.push_back(expense);
         }
-        lastExpenseId = expenses.back().getId();
     }
 
     return expenses;
