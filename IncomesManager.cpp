@@ -29,3 +29,15 @@ vector <Income> IncomesManager::prepareIncomesBasedOnDate(int lowerDate, int upp
     }
     return incomesWithinDate;
 }
+
+
+float IncomesManager::calculateSumOfIncomes(const vector <Income> &incomesToSum)
+{
+    float sum =0;
+    for(vector<Income>::const_iterator it = incomesToSum.begin(); it != incomesToSum.end(); ++it)
+    {
+        sum = sum + atof(it->getAmount().c_str());
+    }
+    return sum;
+}
+

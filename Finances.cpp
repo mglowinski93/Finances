@@ -48,6 +48,14 @@ void Finances::showCurrentMonthBalance()
     vector <Expense> expectedExpenses = expensesManager -> prepareExpensesBasedOnDate(firstDayOfMonth, lastDayOfMonth);
     incomesManager -> showIncomes(expectedIncomes);
     expensesManager -> showExpenses(expectedExpenses);
+
+    cout << endl << endl;
+    cout << "---------------------------------------------------"<<endl;
+    float sumOfIncomes = incomesManager -> calculateSumOfIncomes(expectedIncomes);
+    float sumOfExpenses = expensesManager -> calculateSumOfExpenses(expectedExpenses);
+    cout << "Sum of incomes in current month: " << sumOfIncomes << endl;
+    cout << "Sum of expenses in current month: " << sumOfExpenses << endl;
+    cout << "Difference: " << sumOfIncomes - sumOfExpenses << endl;
 }
 
 void Finances::showPreviousMonthBalance()
@@ -58,6 +66,14 @@ void Finances::showPreviousMonthBalance()
     vector <Expense> expectedExpenses = expensesManager -> prepareExpensesBasedOnDate(firstDayOfMonth, lastDayOfMonth);
     incomesManager -> showIncomes(expectedIncomes);
     expensesManager -> showExpenses(expectedExpenses);
+
+    cout << endl << endl;
+    cout << "---------------------------------------------------"<<endl;
+    float sumOfIncomes = incomesManager -> calculateSumOfIncomes(expectedIncomes);
+    float sumOfExpenses = expensesManager -> calculateSumOfExpenses(expectedExpenses);
+    cout << "Sum of incomes in last month: " << sumOfIncomes << endl;
+    cout << "Sum of expenses in last month: " << sumOfExpenses << endl;
+    cout << "Difference: " << sumOfIncomes - sumOfExpenses << endl;
 }
 
 void Finances::showBalanceFromSpecifiedPeriod()
@@ -90,4 +106,12 @@ void Finances::showBalanceFromSpecifiedPeriod()
     vector <Expense> expectedExpenses = expensesManager -> prepareExpensesBasedOnDate(AdditionalFunctions::convertDateFromStringToInt(startingDate), AdditionalFunctions::convertDateFromStringToInt(endingDate));
     incomesManager -> showIncomes(expectedIncomes);
     expensesManager -> showExpenses(expectedExpenses);
+
+    cout << endl << endl;
+    cout << "---------------------------------------------------"<<endl;
+    float sumOfIncomes = incomesManager -> calculateSumOfIncomes(expectedIncomes);
+    float sumOfExpenses = expensesManager -> calculateSumOfExpenses(expectedExpenses);
+    cout << "Sum of incomes: " << sumOfIncomes << endl;
+    cout << "Sum of expenses: " << sumOfExpenses << endl;
+    cout << "Difference: " << sumOfIncomes - sumOfExpenses << endl;
 }

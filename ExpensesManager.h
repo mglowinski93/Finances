@@ -23,6 +23,7 @@ public:
    void showExpenses(const vector <Expense> &expensesToShow);
    void addExpense();
    vector <Expense> prepareExpensesBasedOnDate(int upperDate, int lowerDate);
+   float calculateSumOfExpenses(const vector <Expense> &expensesToSum);
 };
 
 #endif //EXPENSES_MANAGER

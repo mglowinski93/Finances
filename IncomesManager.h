@@ -24,6 +24,7 @@ public:
     void showIncomes(const vector <Income> &incomesToShow);
     void addIncome();
     vector <Income> prepareIncomesBasedOnDate(int upperDate, int lowerDate);
+    float calculateSumOfIncomes(const vector <Income> &incomesToSum);
 };
 
 #endif // INCOME_MANAGER

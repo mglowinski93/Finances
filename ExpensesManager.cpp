@@ -29,3 +29,13 @@ vector <Expense> ExpensesManager::prepareExpensesBasedOnDate(int lowerDate, int 
     }
     return expensesWithinDate;
 }
+
+float ExpensesManager::calculateSumOfExpenses(const vector <Expense> &expensesToSum)
+{
+    float sum =0;
+    for(vector<Expense>::const_iterator it = expensesToSum.begin(); it != expensesToSum.end(); ++it)
+    {
+        sum = sum + atof(it->getAmount().c_str());
+    }
+    return sum;
+}
