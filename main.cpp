@@ -16,6 +16,10 @@ int main()
     while(true)
     {
         system("cls");
+
+        cin.clear();
+        fflush(stdin);
+
         if(loggedUser.getId() < 0)
         {
             choice = AdditionalFunctions::chooseOptionFromMainMenu();
