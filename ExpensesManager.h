@@ -13,14 +13,16 @@ private:
     const int LOGGED_USER_ID;
     vector <Expense> expenses;
     FileWithExpenses fileWithExpenses;
-    void showExpense(Expense);
+    void showExpense(const Expense);
+
 public:
    ExpensesManager(string expenseFileName, int loggedUserId): fileWithExpenses(expenseFileName), LOGGED_USER_ID(loggedUserId)
    {
     expenses = fileWithExpenses.loadExpensesOfLoggedUser(LOGGED_USER_ID);
    };
-   void showAllExpenses();
+   void showExpenses(const vector <Expense> &expensesToShow);
    void addExpense();
+   vector <Expense> prepareExpensesBasedOnDate(int upperDate, int lowerDate);
 };
 
 #endif //EXPENSES_MANAGER

@@ -14,15 +14,16 @@ private:
     const int LOGGED_USER_ID;
     vector <Income> incomes;
     FileWithIncomes fileWithIncomes;
-    void showIncome(Income);
+    void showIncome(const Income);
 
 public:
     IncomesManager(string incomeFileName, int loggedUserId): fileWithIncomes(incomeFileName), LOGGED_USER_ID(loggedUserId)
     {
        incomes = fileWithIncomes.loadIncomesOfLoggedUser(LOGGED_USER_ID);
     };
-    void showAllIncomes();
+    void showIncomes(const vector <Income> &incomesToShow);
     void addIncome();
+    vector <Income> prepareIncomesBasedOnDate(int upperDate, int lowerDate);
 };
 
 #endif // INCOME_MANAGER

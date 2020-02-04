@@ -8,29 +8,23 @@ vector <Expense> FileWithExpenses::loadExpensesOfLoggedUser(int loggedUserId)
     CMarkup xml;
     if(xml.Load( MCD_T(getFileName().c_str())))
     {
-        int expenseId = -1;
         xml.FindElem(); // EXPENSE element is root
         xml.IntoElem(); // inside ORDER
         while(xml.FindElem(EXPENSE_STRING))
         {
             xml.FindChildElem(EXPENSE_ID_STRING);
-            expenseId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
+            expense.setId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
             xml.FindChildElem(USER_ID_STRING);
-            int assignedUserId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
-            if(loggedUserId == assignedUserId)
-            {
-                expense.setId(expenseId);
-                expense.setUserId(assignedUserId);
-                xml.FindChildElem(TITLE_STRING);
-                expense.setTitle(xml.GetChildData());
-                xml.FindChildElem(AMOUNT_STRING);
-                expense.setAmount(xml.GetChildData());
-                xml.FindChildElem(DATE_STRING);
-                expense.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
-                expenses.push_back(expense);
-            }
+            expense.setUserId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
+            xml.FindChildElem(TITLE_STRING);
+            expense.setTitle(xml.GetChildData());
+            xml.FindChildElem(AMOUNT_STRING);
+            expense.setAmount(xml.GetChildData());
+            xml.FindChildElem(DATE_STRING);
+            expense.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
+            expenses.push_back(expense);
         }
-        lastExpenseId = expenseId;
+        lastExpenseId = expenses.back().getId();
     }
 
     return expenses;

@@ -106,6 +106,44 @@ void AdditionalFunctions::changeFileName(string oldFileName, string newFileName)
     }
 }
 
+string AdditionalFunctions::getCurrentYear()
+{
+    return getCurrentDate().substr(0,4);
+}
+
+string AdditionalFunctions::getYearFromLastYearMonth()
+{
+    return getPreviousMonth() == "12" ? fromIntToString(fromStringToInt(getCurrentYear()) - 1) : getCurrentYear();
+}
+
+string AdditionalFunctions::getCurrentMonth()
+{
+    return getCurrentDate().substr(5,2);
+}
+
+string AdditionalFunctions::getPreviousMonth()
+{
+    string previousMonth;
+    switch(fromStringToInt(getCurrentMonth()))
+    {
+        case 1: previousMonth="12"; break;
+        case 2: previousMonth="01"; break;
+        case 3: previousMonth="02"; break;
+        case 4: previousMonth="03"; break;
+        case 5: previousMonth="04"; break;
+        case 6: previousMonth="05"; break;
+        case 7: previousMonth="06"; break;
+        case 8: previousMonth="07"; break;
+        case 9: previousMonth="08"; break;
+        case 10: previousMonth="09"; break;
+        case 11: previousMonth="10"; break;
+        case 12: previousMonth="11"; break;
+        default: previousMonth = "-1"; break;
+    }
+    return previousMonth;
+
+}
+
 string AdditionalFunctions::getCurrentDate()
 {
     time_t now = time(0);

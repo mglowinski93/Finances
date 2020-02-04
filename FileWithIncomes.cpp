@@ -8,29 +8,23 @@ vector <Income> FileWithIncomes::loadIncomesOfLoggedUser(int loggedUserId)
     CMarkup xml;
     if(xml.Load( MCD_T(getFileName().c_str())))
     {
-        int incomeId = -1;
         xml.FindElem(); // INCOME element is root
         xml.IntoElem(); // inside ORDER
         while( xml.FindElem(INCOME_STRING))
         {
             xml.FindChildElem(INCOME_ID_STRING);
-            incomeId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
+            income.setId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
             xml.FindChildElem(USER_ID_STRING);
-            int assignedUserId = AdditionalFunctions::fromStringToInt(xml.GetChildData());
-            if(loggedUserId == assignedUserId)
-            {
-                income.setId(incomeId);
-                income.setUserId(assignedUserId);
-                xml.FindChildElem(TITLE_STRING);
-                income.setTitle(xml.GetChildData());
-                xml.FindChildElem(AMOUNT_STRING);
-                income.setAmount(xml.GetChildData());
-                xml.FindChildElem(DATE_STRING);
-                income.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
-                incomes.push_back(income);
-            }
+            income.setUserId(AdditionalFunctions::fromStringToInt(xml.GetChildData()));
+            xml.FindChildElem(TITLE_STRING);
+            income.setTitle(xml.GetChildData());
+            xml.FindChildElem(AMOUNT_STRING);
+            income.setAmount(xml.GetChildData());
+            xml.FindChildElem(DATE_STRING);
+            income.setDate(AdditionalFunctions::convertDateFromStringToInt(xml.GetChildData()));
+            incomes.push_back(income);
         }
-        lastIncomeId = incomeId;
+        lastIncomeId = incomes.back().getId();
     }
 
     return incomes;

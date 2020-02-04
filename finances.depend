@@ -53,7 +53,7 @@
 	"vector"
 	"PlikTekstowy.h"
 
-1580661583 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\main.cpp
+1580798657 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\main.cpp
 	<iostream>
 	<windows.h>
 	"Finances.h"
@@ -94,10 +94,10 @@
 	<iostream>
 	<fstream>
 
-1580665026 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\additionalfunctions.cpp
+1580797112 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\additionalfunctions.cpp
 	"AdditionalFunctions.h"
 
-1580661804 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\additionalfunctions.h
+1580670794 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\additionalfunctions.h
 	<iostream>
 	<sstream>
 	<algorithm>
@@ -118,7 +118,7 @@
 	"vector"
 	"XmlFile.h"
 
-1580666286 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithincomes.cpp
+1580798068 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithincomes.cpp
 	"FileWithIncomes.h"
 
 1580661583 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithincomes.h
@@ -129,15 +129,15 @@
 	"AdditionalFunctions.h"
 	"XmlFile.h"
 
-1580665611 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\incomesmanager.cpp
+1580798792 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\incomesmanager.cpp
 	"IncomesManager.h"
 
-1580665736 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\incomesmanager.h
+1580671977 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\incomesmanager.h
 	<vector>
 	"Income.h"
 	"FileWithIncomes.h"
 
-1580661583 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\finances.h
+1580798657 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\finances.h
 	<iostream>
 	"UsersManager.h"
 	"IncomesManager.h"
@@ -150,7 +150,7 @@
 	"User.h"
 	"FileWithUsers.h"
 
-1580662057 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\finances.cpp
+1580798665 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\finances.cpp
 	"Finances.h"
 
 1580645399 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\usersmanager.cpp
@@ -195,14 +195,14 @@
 	"AdditionalFunctions.h"
 	"XmlFile.h"
 
-1580648175 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\expensesmanager.cpp
+1580798777 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\expensesmanager.cpp
 	"ExpensesManager.h"
 
-1580650082 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\expensesmanager.h
+1580671977 c:\users\mglow\documents\przyszlyprogramista\c++\finanse\expensesmanager.h
 	<vector>
 	"Expense.h"
 	"FileWithExpenses.h"
 
-1580662769 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithexpenses.cpp
+1580798068 source:c:\users\mglow\documents\przyszlyprogramista\c++\finanse\filewithexpenses.cpp
 	"FileWithExpenses.h"
 

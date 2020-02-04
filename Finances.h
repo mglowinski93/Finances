@@ -33,12 +33,11 @@ public:
     User loginUser();
     User logoutUser();
     void changePasswordOfLoggedUser(User loggedUser);
-    void showAllIncomes();
-    void showAllExpenses();
     void addIncome(int loggedUserId);
     void addExpense(int loggedUserId);
     void showCurrentMonthBalance();
     void showPreviousMonthBalance();
+    void showBalanceFromSpecifiedPeriod();
 };
 
 #endif // User_H
